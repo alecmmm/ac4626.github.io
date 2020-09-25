@@ -4,13 +4,16 @@
 body {
     background-color:black;
     font-family: 'VT323', monospace;
-    color: white;
+    color:#ffff00;
+
 
 }
 #header{
-    color:white;
+  color: #00ffff;
+
 }/* every thing in the header section of your html, which is "Your Name" for now */
 .section {
+  color: white;
     font-size:25px;
 }/* every thing with the class name of section, which are the lines "Assignment" and "Projects" for now */
 
