@@ -5,9 +5,9 @@ body {
     background-color:black;
     font-family: 'VT323', monospace;
     color:#ffff00;
-
-
 }
+
+
 #header{
   color: #00ffff;
 
@@ -16,6 +16,11 @@ body {
   color: white;
     font-size:25px;
 }/* every thing with the class name of section, which are the lines "Assignment" and "Projects" for now */
+
+.whitetxt {
+  color: white;
+    font-size:10px;
+}/*
 
 a {
     font-size:14px;
