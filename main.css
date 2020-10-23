@@ -11,7 +11,8 @@ body {
 #header{
   color: #00ffff;
 
-}/* every thing in the header section of your html, which is "Your Name" for now */
+}
+
 .section {
   color: white;
     font-size:25px;

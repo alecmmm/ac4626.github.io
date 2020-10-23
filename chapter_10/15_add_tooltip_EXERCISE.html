@@ -3,9 +3,25 @@
 	<head>
 		<meta charset="utf-8">
 		<title>D3: Time axis, prettier</title>
-		<script type="text/javascript" src="../d3.js"></script>
+		<script type="text/javascript" src="../d3.js" ></script>
 		<style type="text/css">
-			/* No style rules here yet */		
+
+			#tooltip {
+			  position: fixed;
+				opacity: .7;
+				font-weight: bold;
+			  height: auto;
+			  padding: 5px;
+				display: none;
+			  background-color: gray;
+				color: white;
+			  pointer-events: none;
+				margin: 10px;
+				font-family: sans-serif;
+				font-size: 12px;
+				line-height: 15px;
+			}
+
 		</style>
 	</head>
 	<body>
@@ -16,12 +32,12 @@
             //there are 2 bugs - both in line 42-43 - starting at d3.csv("..
             //fix the file path and the csv function so that the data is loaded and displays correctly
             //Then implement a tooltip of your choice for the circles on rollover.
-            
+
 			//Width and height
 			var w = 600;
 			var h = 400;
 			var padding = 40;
-			
+
 			var dataset, xScale, yScale, xAxis, yAxis;  //Empty, for now
 
 			//For converting strings to Dates
@@ -40,7 +56,7 @@
 
 			//Load in the data
 			d3.csv("../time_scale_data.csv", rowConverter)
-            .then(function(d) {
+            .then(function(data) {
 				//Copy data into global dataset
 				dataset = data;
 
@@ -98,9 +114,16 @@
 				   .attr("stroke", "#ddd")
 				   .attr("stroke-width", 1);
 
-                   //TODO: 
+                   //TODO:
                    //define a tooltip
                    //call it
+				var tooltip = d3.select("body")
+				.append("div").attr("id", "tooltip")
+					.text("This is a tooltip!")
+
+				var label = tooltip.append("div")
+					.attr("class", "label")
+
 
 				//Generate circles last, so they appear in front
 				svg.selectAll("circle")
@@ -117,18 +140,25 @@
                    .on("mouseover",function(d,i){
                        d3.select(this).attr("fill","red")
                        //TODO: show tooltip here
+											 tooltip.style("display", "block")
+											 // console.log(xScale(d.Date));
+											 .style("left", 10 + xScale(d.Date) + "px")
+											 .style("top", 10 + yScale(d.Amount) + "px")
+											 label.html(d3.timeFormat("%m/%d/%y")(d.Date) + "<br> " + d.Amount)
                    })
                    .on("mouseout",function(d,i){
                        d3.select(this).attr("fill","black")
                        //TODO: hide tooltip here
+											 tooltip.style("display", "none")
                    });
-	   			
+
+
 	   			//Create X axis
 	   			svg.append("g")
 	   				.attr("class", "axis")
 	   				.attr("transform", "translate(0," + (h - padding) + ")")
 	   				.call(xAxis);
-	   			
+
 	   			//Create Y axis
 	   			svg.append("g")
 	   				.attr("class", "axis")
@@ -136,7 +166,7 @@
 	   				.call(yAxis);
 
 			});
-			
+
 		</script>
 	</body>
 </html>
